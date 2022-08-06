@@ -89,15 +89,20 @@
             </button>
           </form>
           <!-- Registration Form -->
-          <form v-show="tab === 'register'">
+          <VeeForm v-show="tab === 'register'" :validation-schema="schema">
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
-              <input
+              <VeeField
+                name="name"
                 type="text"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                 placeholder="Enter Name"
               />
+              <ErrorMessage class="text-red-600" name="name" />
+              <!-- :rule="{required:true}" -->
+              <!-- :rules="'required' " -->
+              <!-- this will generate a spane tag if there is an error -->
             </div>
             <!-- Email -->
             <div class="mb-3">
@@ -159,7 +164,7 @@
             >
               Submit
             </button>
-          </form>
+          </VeeForm>
         </div>
       </div>
     </div>
@@ -173,7 +178,18 @@ import useModalStore from "@/stores/modal.js";
 export default {
   name: "AppAuth",
   data() {
-    return { tab: "login" };
+    return {
+      tab: "login",
+      schema: {
+        name: "required|min:3|max:100|alpha_spaces",
+        email: "",
+        age: "",
+        password: "",
+        confirm_password: "",
+        country: "",
+        tos: "",
+      },
+    };
   },
   computed: {
     ...mapState(useModalStore, ["hiddenClass"]),
