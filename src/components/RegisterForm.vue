@@ -113,6 +113,8 @@
 </template>
 
 <script>
+import { auth } from "@/includes/firebase";
+
 export default {
   name: "RegisterForm",
   data() {
@@ -139,11 +141,27 @@ export default {
   },
   methods: {
     //vee-validate 2bl mtsht8l el onsubmit function deh, bt3ml b default validate el 2wal w lw kda tsht8lha lw msh kda tw2fha, w kaman y default bt3ml e.preventDefault()
-    register(values) {
+    async register(values) {
       this.reg_in_submission = true;
       this.reg_show_alert = true;
       this.reg_alert_variant = "bg-blue-500";
       this.reg_alert_msg = "Please wait! Your account is being created.";
+
+      let userCreditinals;
+      try {
+        userCreditinals = await auth.createUserWithEmailAndPassword(
+          values.email,
+          values.password
+        );
+        console.log(userCreditinals);
+      } catch (error) {
+        console.log(error);
+        this.reg_in_submission = false;
+        this.reg_alert_variant = "bg-red-500";
+        this.reg_alert_msg =
+          "An unexpected error occurred. Please try again later.";
+        return;
+      }
 
       this.reg_alert_variant = "bg-green-500";
       this.reg_alert_msg = "Success! Your account has been created.";
