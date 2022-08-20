@@ -53,13 +53,13 @@ export default {
   name: "App",
   components: { AppHeader, AppAuth },
   computed: {
-    ...mapWritableState(useUserStore, ["userLoggedin"]),
+    ...mapWritableState(useUserStore, ["userLoggedIn"]),
   },
   created() {
     const userFound = auth.currentUser;
     console.log(userFound);
     if (userFound) {
-      this.userLoggedin = true;
+      this.userLoggedIn = true;
     }
   },
 };
