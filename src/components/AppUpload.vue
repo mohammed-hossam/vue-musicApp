@@ -51,6 +51,7 @@ import { storage, auth, songsCollection } from "@/includes/firebase";
 
 export default {
   name: "AppUpload",
+  props: ["addSong"],
   data() {
     return {
       is_dragover: false,
@@ -126,6 +127,8 @@ export default {
               song.url = await task.snapshot.ref.getDownloadURL();
               const songRef = await songsCollection.add(song); //add will make firebase add random id for the doc, while set allow us to add the id we want
               const songSnapshot = await songRef.get();
+              this.addSong(songSnapshot);
+
               this.uploads[uploadedIndex].variant = "bg-green-400";
               this.uploads[uploadedIndex].icon = "fas fa-check";
               this.uploads[uploadedIndex].text_class = "text-green-400";
