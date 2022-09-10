@@ -1,35 +1,37 @@
 <template>
-  <!-- Main Content -->
-  <section class="container mx-auto mt-6">
-    <div class="md:grid md:grid-cols-3 md:gap-4">
-      <AppUpload ref="upload" v-bind:addSong="addSong" />
+  <main>
+    <!-- Main Content -->
+    <section class="container mx-auto mt-6">
+      <div class="md:grid md:grid-cols-3 md:gap-4">
+        <AppUpload ref="upload" v-bind:addSong="addSong" />
 
-      <div class="col-span-2">
-        <div
-          class="bg-white rounded border border-gray-200 relative flex flex-col"
-        >
-          <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
-            <span class="card-title">My Songs</span>
-            <i
-              class="fa fa-compact-disc float-right text-green-400 text-2xl"
-            ></i>
-          </div>
-          <div class="p-6">
-            <!-- song Items -->
-            <SongItem
-              v-for="(song, index) in songs"
-              :key="song.docId"
-              :song="song"
-              :updateSong="updateSong"
-              :removeSong="removeSong"
-              :updateUnsavedFlag="updateUnsavedFlag"
-              :index="index"
-            />
+        <div class="col-span-2">
+          <div
+            class="bg-white rounded border border-gray-200 relative flex flex-col"
+          >
+            <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
+              <span class="card-title">My Songs</span>
+              <i
+                class="fa fa-compact-disc float-right text-green-400 text-2xl"
+              ></i>
+            </div>
+            <div class="p-6">
+              <!-- song Items -->
+              <SongItem
+                v-for="(song, index) in songs"
+                :key="song.docId"
+                :song="song"
+                :updateSong="updateSong"
+                :removeSong="removeSong"
+                :updateUnsavedFlag="updateUnsavedFlag"
+                :index="index"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </template>
 
 <script>

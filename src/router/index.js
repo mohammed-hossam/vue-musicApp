@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import SongView from "../views/SongView.vue";
 import ManageView from "../views/ManageView.vue";
 import useUserStore from "../stores/user.js";
 
@@ -8,6 +9,11 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/song/:id",
+    name: "song",
+    component: SongView,
   },
   {
     path: "/manage",
